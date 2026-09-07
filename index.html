@@ -177,8 +177,8 @@ footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
 
       <div class="grid">
         <article class="card">
-          <div class="card-image" data-images='["infinity-heights-1.png","infinity-heights-2.png","infinity-heights-3.png","infinity-heights-4.jpg","infinity-heights-5.jpg","infinity-heights-6.jpg","infinity-heights-7.jpg"]'>
-            <img src="infinity-heights-1.png" alt="Infinity Heights Nosy Be">
+          <div class="card-image" data-images='["infinity-heights-1.jpg","infinity-heights-2.jpg","infinity-heights-3.jpg","infinity-heights-4.jpg","infinity-heights-5.jpg","infinity-heights-6.jpg","infinity-heights-7.jpg"]'>
+            <img src="infinity-heights-1.jpg" alt="Infinity Heights Nosy Be">
             <button class="car-nav prev" aria-label="Previous photo">‹</button>
             <button class="car-nav next" aria-label="Next photo">›</button>
             <div class="car-dots"></div>
@@ -207,7 +207,7 @@ footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
         </article>
 
         <article class="card">
-          <div class="card-image" data-images='["androhibe-1.jpg","androhibe-2.png","androhibe-3.png"]'>
+          <div class="card-image" data-images='["androhibe-1.jpg","androhibe-2.jpg","androhibe-3.jpg"]'>
             <img src="androhibe-1.jpg" alt="Androhibe residential development">
             <button class="car-nav prev" aria-label="Previous photo">‹</button>
             <button class="car-nav next" aria-label="Next photo">›</button>
@@ -227,7 +227,7 @@ footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
   <section id="investment">
     <div class="container">
       <div class="feature">
-        <div class="feature-img"><img src="infinity-heights-2.png" alt="Infinity Heights"></div>
+        <div class="feature-img"><img src="infinity-heights-2.jpg" alt="Infinity Heights" loading="lazy" decoding="async"></div>
         <div class="feature-copy">
           <div class="eyebrow">Investment Opportunities</div>
           <h2 data-en="Built for long-term value." data-fr="Créer de la valeur sur le long terme.">Built for long-term value.</h2>
@@ -359,6 +359,8 @@ document.querySelectorAll(".card-image[data-images]").forEach(box=>{
   const img = box.querySelector("img");
   const dotsWrap = box.querySelector(".car-dots");
   let idx = 0;
+  // Preload every photo in this carousel so clicking through is instant
+  images.forEach(src=>{ const preload = new Image(); preload.src = src; });
   images.forEach((_,i)=>{
     const dot = document.createElement("span");
     dot.className = "car-dot" + (i===0 ? " active" : "");
