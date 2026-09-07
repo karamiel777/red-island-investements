@@ -76,6 +76,7 @@ section{padding:105px 0}
 .contact-form .btn:hover{background:transparent;color:var(--gold)}
 .form-note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px}
 .field-error{color:#e28b8b;font-size:12px;min-height:16px;display:block}
+.iti.invalid input{border-color:#e28b8b}
 #form-status{font-size:13px;margin-top:14px;min-height:18px}
 #form-status.ok{color:#8fd19e}
 #form-status.err{color:#e28b8b}
@@ -383,15 +384,26 @@ document.querySelectorAll(".card-image[data-images]").forEach(box=>{
 function validatePhone(){
   const errorEl = document.getElementById("cf-phone-error");
   const lang = document.documentElement.lang || "en";
-  if(phoneInput.value.trim() === "" || !iti.isValidNumber()){
+  let valid = false;
+  try{
+    valid = phoneInput.value.trim() !== "" && iti.isValidNumber();
+  } catch(err){
+    // Validation library not fully loaded yet — fall back to a basic length check
+    const digits = phoneInput.value.replace(/\D/g,"");
+    valid = digits.length >= 7 && digits.length <= 12;
+  }
+  if(!valid){
     errorEl.textContent = lang === "fr"
       ? "Merci de saisir un numéro de téléphone valide."
       : "Please enter a valid phone number.";
+    phoneInput.closest(".iti").classList.add("invalid");
     return false;
   }
   errorEl.textContent = "";
+  phoneInput.closest(".iti").classList.remove("invalid");
   return true;
 }
+phoneInput.addEventListener("blur", validatePhone);
 phoneInput.addEventListener("input", ()=>{ if(document.getElementById("cf-phone-error").textContent) validatePhone(); });
 
 async function sendMail(e){
