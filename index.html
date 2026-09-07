@@ -111,14 +111,18 @@ section{padding:105px 0}
 footer{padding:40px 0;color:var(--muted);font-size:13px}
 .footer-inner{display:flex;justify-content:space-between;gap:30px;align-items:center}
 footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
-.mobile-menu{display:none}
+.mobile-menu{display:none;background:none;border:0;color:var(--gold);cursor:pointer;padding:6px}
+.mobile-nav{display:none}
 
 @media(max-width:850px){
   .container{width:min(100% - 30px,650px)}
   .nav{height:82px}
   .logo{max-width:140px;max-height:44px}
   nav{display:none}
-  .mobile-menu{display:block;color:var(--gold);font-size:22px}
+  .mobile-menu{display:block;font-size:26px;line-height:1}
+  .mobile-nav{position:fixed;top:82px;left:0;right:0;bottom:0;background:rgba(8,6,29,.98);backdrop-filter:blur(14px);flex-direction:column;padding:20px 24px;opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .2s,transform .2s;z-index:19;overflow-y:auto}
+  .mobile-nav.open{display:flex;opacity:1;pointer-events:auto;transform:translateY(0)}
+  .mobile-nav a{display:block;padding:20px 4px;border-bottom:1px solid var(--line);font-size:16px;letter-spacing:2px;text-transform:uppercase;color:#e9e6ef}
   .hero{min-height:75vh}
   .hero-content{padding:80px 0 55px}
   h1{font-size:54px}
@@ -153,7 +157,14 @@ footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
       <button id="enBtn" class="active" onclick="setLang('en')">EN</button>
       <button id="frBtn" onclick="setLang('fr')">FR</button>
     </div>
+    <button class="mobile-menu" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#projects" data-en="Projects" data-fr="Projets">Projects</a>
+    <a href="#investment" data-en="Investment" data-fr="Investissement">Investment</a>
+    <a href="#about" data-en="About" data-fr="À propos">About</a>
+    <a href="#contact" data-en="Contact" data-fr="Contact">Contact</a>
+  </nav>
 </header>
 
 <main id="top">
@@ -202,8 +213,8 @@ footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
           </div>
           <div class="card-body">
             <h3>Ivato</h3>
-            <div class="meta">Antananarivo · Residential</div>
-            <p data-en="A contemporary residential development project in the Ivato area." data-fr="Un projet résidentiel contemporain dans la zone d'Ivato.">A contemporary residential development project in the Ivato area.</p>
+            <div class="meta" data-en="Antananarivo · Luxury Residential" data-fr="Antananarivo · Résidentiel haut de gamme">Antananarivo · Luxury Residential</div>
+            <p data-en="A gated residence of 4 luxury apartments and one villa, strategically located near Ivato International Airport. Land already acquired — further details to follow as the project progresses." data-fr="Une résidence fermée haut de gamme composée de 4 appartements de luxe et d'une villa, idéalement située à proximité de l'aéroport international d'Ivato. Terrain déjà acquis — les détails du projet seront précisés au fil de son avancement.">A gated residence of 4 luxury apartments and one villa, strategically located near Ivato International Airport. Land already acquired — further details to follow as the project progresses.</p>
             <a class="link" href="#contact" data-en="Enquire →" data-fr="Nous contacter →">Enquire →</a>
           </div>
         </article>
@@ -217,8 +228,8 @@ footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
           </div>
           <div class="card-body">
             <h3>Androhibe</h3>
-            <div class="meta">Antananarivo · Residential</div>
-            <p data-en="A contemporary residential development in Androhibe." data-fr="Un projet résidentiel contemporain à Androhibe.">A contemporary residential development in Androhibe.</p>
+            <div class="meta" data-en="Antananarivo · Luxury Residential" data-fr="Antananarivo · Résidentiel haut de gamme">Antananarivo · Luxury Residential</div>
+            <p data-en="A R+6 luxury apartment building on land already acquired, in Androhibe — a sought-after residential neighbourhood close to Ivandry, with a pharmacy and petrol stations just minutes away." data-fr="Un immeuble R+6 d'appartements de luxe, sur un terrain déjà acquis, dans le quartier prisé d'Androhibe — un secteur résidentiel haut de gamme proche d'Ivandry, à quelques minutes d'une pharmacie et de stations-service.">A R+6 luxury apartment building on land already acquired, in Androhibe — a sought-after residential neighbourhood close to Ivandry, with a pharmacy and petrol stations just minutes away.</p>
             <a class="link" href="#contact" data-en="Enquire →" data-fr="Nous contacter →">Enquire →</a>
           </div>
         </article>
@@ -346,6 +357,21 @@ function setLang(lang){
 }
 const saved=localStorage.getItem("rdi-lang");
 if(saved) setLang(saved);
+
+// Mobile hamburger menu
+const menuToggle = document.getElementById("menuToggle");
+const mobileNav = document.getElementById("mobileNav");
+function closeMobileNav(){
+  mobileNav.classList.remove("open");
+  menuToggle.textContent = "☰";
+  menuToggle.setAttribute("aria-expanded","false");
+}
+menuToggle.addEventListener("click", ()=>{
+  const isOpen = mobileNav.classList.toggle("open");
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+  menuToggle.setAttribute("aria-expanded", isOpen);
+});
+mobileNav.querySelectorAll("a").forEach(a=> a.addEventListener("click", closeMobileNav));
 
 // Country/flag/dial-code picker on the phone field (searchable, scrollable list)
 const phoneInput = document.querySelector("#cf-phone");
