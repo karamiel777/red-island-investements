@@ -7,6 +7,7 @@
 <meta name="description" content="Red Island Investments — real estate, investment and development opportunities in Madagascar.">
 <link rel="icon" type="image/jpeg" href="favicon.jpg">
 <link rel="shortcut icon" type="image/jpeg" href="favicon.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.min.css">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
@@ -28,7 +29,7 @@ img{display:block;max-width:100%}
 .container{width:min(1180px,calc(100% - 48px));margin:auto}
 header{position:sticky;top:0;z-index:20;background:rgba(8,6,29,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav{height:96px;display:flex;align-items:center;justify-content:space-between;gap:30px}
-.logo{width:205px;height:auto}
+.logo{width:auto;height:auto;max-width:190px;max-height:56px;object-fit:contain}
 nav{display:flex;align-items:center;gap:34px;font-size:13px;letter-spacing:2px;text-transform:uppercase}
 nav a{color:#e9e6ef;transition:.2s}
 nav a:hover{color:var(--gold)}
@@ -60,11 +61,34 @@ section{padding:105px 0}
 .car-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2}
 .car-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)}
 .car-dot.active{background:var(--gold)}
-.contact-form{display:flex;flex-direction:column;gap:14px}
-.contact-form label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
-.contact-form input,.contact-form textarea{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:14px 16px;font-family:inherit;font-size:14px;border-radius:2px}
-.contact-form input:focus,.contact-form textarea:focus{outline:1px solid var(--gold)}
-.contact-form button{cursor:pointer;background:transparent;font-family:inherit;align-self:flex-start;margin-top:4px}
+.contact-form{margin-top:36px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:36px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.form-field.full{grid-column:1 / -1}
+.contact-form label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.contact-form label sup{color:var(--gold)}
+.contact-form input,.contact-form select,.contact-form textarea{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:13px 15px;font-family:inherit;font-size:14px;border-radius:4px;transition:border-color .2s}
+.contact-form textarea{resize:vertical;min-height:110px}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#716d84}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{outline:none;border-color:var(--gold)}
+.contact-form select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23d9b85b'><path d='M5.5 7.5l4.5 4.5 4.5-4.5z'/></svg>");background-repeat:no-repeat;background-position:right 14px center;background-size:14px}
+.contact-form .btn{cursor:pointer;background:var(--gold);color:#09071d;border:1px solid var(--gold);width:100%;justify-content:center;padding:16px 23px;font-size:12px;margin-top:6px;border-radius:4px;transition:.2s}
+.contact-form .btn:hover{background:transparent;color:var(--gold)}
+.form-note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px}
+#form-status{font-size:13px;margin-top:14px;min-height:18px}
+#form-status.ok{color:#8fd19e}
+#form-status.err{color:#e28b8b}
+
+/* intl-tel-input dark theme overrides */
+.iti{width:100%;display:block}
+.iti input{width:100%}
+.iti__country-list{background:var(--panel2);border:1px solid var(--line);color:var(--text)}
+.iti__country{color:var(--text)}
+.iti__country.iti__highlight{background:rgba(217,184,91,.15)}
+.iti__search-input{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:8px 10px}
+.iti__flag-box,.iti__country-name{color:var(--text)}
+.iti__selected-flag{background:transparent}
+.iti__divider{border-bottom:1px solid var(--line)}
 .card-body{padding:30px}
 .card h3{font-size:31px;margin-bottom:8px}
 .meta{color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
@@ -84,13 +108,13 @@ section{padding:105px 0}
 .contact-item a{font-size:20px}
 footer{padding:40px 0;color:var(--muted);font-size:13px}
 .footer-inner{display:flex;justify-content:space-between;gap:30px;align-items:center}
-footer img{width:180px}
+footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
 .mobile-menu{display:none}
 
 @media(max-width:850px){
   .container{width:min(100% - 30px,650px)}
   .nav{height:82px}
-  .logo{width:160px}
+  .logo{max-width:140px;max-height:44px}
   nav{display:none}
   .mobile-menu{display:block;color:var(--gold);font-size:22px}
   .hero{min-height:75vh}
@@ -106,6 +130,8 @@ footer img{width:180px}
   .contact h2{font-size:48px;margin-bottom:35px}
   .footer-inner{flex-direction:column;align-items:flex-start}
   .car-nav{opacity:1}
+  .contact-form{padding:26px}
+  .form-row{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -241,19 +267,39 @@ footer img{width:180px}
         <div class="eyebrow">Get in touch</div>
         <h2 data-en="Let's discuss your next opportunity." data-fr="Parlons de votre prochaine opportunité.">Let's discuss your next opportunity.</h2>
         <form class="contact-form" onsubmit="sendMail(event)">
-          <div>
-            <label data-en="Name" data-fr="Nom">Name</label>
-            <input type="text" id="cf-name" required>
+          <input type="text" id="cf-honey" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-row">
+            <div class="form-field">
+              <label data-en="Full name" data-fr="Nom complet">Full name<sup>*</sup></label>
+              <input type="text" id="cf-name" placeholder="Jane Doe" required>
+            </div>
+            <div class="form-field">
+              <label data-en="Email" data-fr="Email">Email<sup>*</sup></label>
+              <input type="email" id="cf-email" placeholder="jane@email.com" required>
+            </div>
           </div>
-          <div>
-            <label data-en="Email" data-fr="Email">Email</label>
-            <input type="email" id="cf-email" required>
+          <div class="form-row">
+            <div class="form-field">
+              <label data-en="Phone (optional)" data-fr="Téléphone (facultatif)">Phone (optional)</label>
+              <input type="tel" id="cf-phone" placeholder="7 12 345 678">
+            </div>
+            <div class="form-field">
+              <label data-en="Project of interest" data-fr="Projet concerné">Project of interest</label>
+              <select id="cf-project">
+                <option value="Infinity Heights" data-en="Infinity Heights" data-fr="Infinity Heights">Infinity Heights</option>
+                <option value="Ivato" data-en="Ivato" data-fr="Ivato">Ivato</option>
+                <option value="Androhibe" data-en="Androhibe" data-fr="Androhibe">Androhibe</option>
+                <option value="General enquiry" data-en="General enquiry" data-fr="Demande générale">General enquiry</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label data-en="Message" data-fr="Message">Message</label>
-            <textarea id="cf-message" rows="5" required></textarea>
+          <div class="form-field full">
+            <label data-en="Message" data-fr="Message">Message<sup>*</sup></label>
+            <textarea id="cf-message" rows="5" placeholder="Tell us about your enquiry…" required></textarea>
           </div>
-          <button type="submit" class="btn" data-en="Send message →" data-fr="Envoyer →">Send message →</button>
+          <button type="submit" class="btn" id="cf-submit" data-en="Send message →" data-fr="Envoyer →">Send message →</button>
+          <p id="form-status" role="status"></p>
+          <p class="form-note" data-en="Sent directly to info@redislandinvestments.com." data-fr="Envoyé directement à info@redislandinvestments.com.">Sent directly to info@redislandinvestments.com.</p>
         </form>
       </div>
       <div class="contact-info">
@@ -281,7 +327,11 @@ footer img{width:180px}
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script>
+// ⚠️ Formulaire branché sur FormSubmit avec ton adresse — active-le au premier envoi (email de confirmation)
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/info@redislandinvestments.com";
+
 function setLang(lang){
   document.documentElement.lang=lang;
   document.querySelectorAll("[data-en]").forEach(el=>{
@@ -293,6 +343,15 @@ function setLang(lang){
 }
 const saved=localStorage.getItem("rdi-lang");
 if(saved) setLang(saved);
+
+// Country/flag/dial-code picker on the phone field (searchable, scrollable list)
+const phoneInput = document.querySelector("#cf-phone");
+const iti = window.intlTelInput(phoneInput, {
+  initialCountry: "mg",
+  preferredCountries: ["mg","fr","ae","gb","us","cn"],
+  separateDialCode: true,
+  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
+});
 
 // Photo carousel for project cards
 document.querySelectorAll(".card-image[data-images]").forEach(box=>{
@@ -316,15 +375,50 @@ document.querySelectorAll(".card-image[data-images]").forEach(box=>{
   img.addEventListener("click", ()=> show(idx+1));
 });
 
-// Contact form -> opens the visitor's email client pre-filled
-function sendMail(e){
+// Contact form -> sends the message directly via Formspree, no email app needed
+async function sendMail(e){
   e.preventDefault();
-  const name = document.getElementById("cf-name").value;
-  const email = document.getElementById("cf-email").value;
-  const message = document.getElementById("cf-message").value;
-  const subject = encodeURIComponent("Enquiry from " + name + " — Red Island Investments website");
-  const body = encodeURIComponent(message + "\n\n---\n" + name + "\n" + email);
-  window.location.href = "mailto:info@redislandinvestments.com?subject=" + subject + "&body=" + body;
+  const btn = document.getElementById("cf-submit");
+  const status = document.getElementById("form-status");
+  const lang = document.documentElement.lang || "en";
+  const originalLabel = btn.innerHTML;
+  btn.disabled = true;
+  btn.textContent = lang === "fr" ? "Envoi…" : "Sending…";
+  status.className = "";
+  status.textContent = "";
+
+  const payload = {
+    name: document.getElementById("cf-name").value,
+    email: document.getElementById("cf-email").value,
+    phone: iti.getNumber() || phoneInput.value,
+    project: document.getElementById("cf-project").value,
+    message: document.getElementById("cf-message").value,
+    _subject: "New website enquiry — " + document.getElementById("cf-project").value,
+    _template: "table",
+    _captcha: "false",
+    _honey: document.getElementById("cf-honey").value
+  };
+
+  try{
+    const res = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok) throw new Error("Request failed");
+    status.textContent = lang === "fr" ? "Merci, votre message a bien été envoyé." : "Thanks, your message has been sent.";
+    status.className = "ok";
+    e.target.reset();
+    iti.setNumber("");
+  } catch(err){
+    status.textContent = lang === "fr"
+      ? "Erreur d'envoi — réessayez ou écrivez directement à info@redislandinvestments.com."
+      : "Something went wrong — please retry or email info@redislandinvestments.com directly.";
+    status.className = "err";
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalLabel;
+  }
 }
 </script>
 
