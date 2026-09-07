@@ -1,200 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Red Island Investments — Real Estate, Investment & Development in Madagascar.">
-  <title>Red Island Investments | Madagascar</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-  <style>
-    :root{--ink:#0b0820;--ink2:#12102a;--gold:#d8b65d;--cream:#f4f0e7;--muted:#aaa7b5;--line:rgba(216,182,93,.28);--white:#fff}
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:var(--ink);color:var(--white);font-family:"DM Sans",sans-serif;line-height:1.6}
-    a{color:inherit;text-decoration:none}
-    .container{width:min(1180px,calc(100% - 48px));margin:auto}
-    header{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(9,5,31,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
-    .nav{height:88px;display:flex;align-items:center;justify-content:space-between;gap:30px}
-    .brand img{width:178px;display:block}
-    nav{display:flex;align-items:center;gap:28px;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-    nav a{opacity:.86;transition:.2s} nav a:hover{color:var(--gold);opacity:1}
-    .lang{display:flex;gap:5px;border:1px solid rgba(255,255,255,.16);padding:4px;border-radius:999px}
-    .lang button{background:transparent;border:0;color:#aaa7b5;padding:6px 9px;border-radius:999px;cursor:pointer;font:600 10px "DM Sans";letter-spacing:.08em}
-    .lang button.active{background:var(--gold);color:var(--ink)}
-    .hero{min-height:92vh;padding-top:88px;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:
-      linear-gradient(90deg,rgba(9,5,31,.86) 0%,rgba(9,5,31,.45) 45%,rgba(9,5,31,.12) 100%),
-      linear-gradient(135deg,#162c44,#244c65 45%,#0b1830)}
-    .hero-photo{position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(9,5,31,.82),rgba(9,5,31,.28)),url("images/hero.jpg");background-size:cover;background-position:center}
-    .hero-content{position:relative;z-index:1;padding:120px 0 110px;max-width:760px}
-    .eyebrow{color:var(--gold);font-size:11px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:24px}
-    h1,h2,h3{font-family:"Playfair Display",serif;font-weight:500;line-height:1.08}
-    h1{font-size:clamp(48px,7vw,88px);max-width:850px}
-    .hero p{margin-top:28px;color:#ddd9df;max-width:650px;font-size:18px}
-    .buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
-    .btn{display:inline-flex;padding:14px 22px;border:1px solid var(--gold);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
-    .btn.primary{background:var(--gold);color:var(--ink)}
-    section{padding:110px 0}
-    .light{background:var(--cream);color:var(--ink)}
-    .section-head{display:flex;justify-content:space-between;gap:50px;align-items:end;margin-bottom:45px}
-    .section-head h2{font-size:clamp(38px,5vw,60px)}
-    .section-head p{max-width:480px;color:#77727d}
-    .kicker{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:13px}
-    .light .kicker{color:#8b6e28}
-    .pillars{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(11,8,32,.15)}
-    .pillar{padding:30px 24px 10px 0;border-right:1px solid rgba(11,8,32,.15);margin-right:24px}
-    .pillar:last-child{border:0}.pillar h3{font-size:24px;margin-bottom:10px}.pillar p{color:#77727d;font-size:14px}
-    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--ink2);border:1px solid rgba(255,255,255,.08);overflow:hidden;transition:transform .3s,border .3s}
-    .card:hover{transform:translateY(-5px);border-color:var(--line)}
-    .photo{height:340px;background-size:cover;background-position:center}
-    .photo.infinity{background-image:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.55)),url("images/infinity-heights/infinity-heights-1.png"),linear-gradient(135deg,#244c65,#10172d)}
-    .photo.ivato{background-image:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.55)),url("images/ivato/ivato-1.jpg"),linear-gradient(135deg,#28445b,#10172d)}
-    .photo.androhibe{background-image:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.55)),url("images/androhibe/androhibe-1.jpg"),linear-gradient(135deg,#3d4038,#10172d)}
-    .card-body{padding:26px}.card-body h3{font-size:29px}.meta{color:var(--gold);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin:7px 0 13px}.card-body p{color:var(--muted);font-size:14px}.link{display:inline-block;margin-top:20px;color:var(--gold);font-size:10px;letter-spacing:.15em;text-transform:uppercase}
-    .opps{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
-    .opp{background:var(--ink2);padding:42px}.opp h3{font-size:29px;margin-bottom:12px}.opp p{color:var(--muted);font-size:14px;max-width:500px}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-    .about-grid h2{font-size:clamp(40px,5vw,64px)}
-    .about-grid p{color:#77727d;margin-top:20px;max-width:570px}
-    .contact{background:#080619}
-    .contact-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:80px}
-    .contact h2{font-size:clamp(42px,6vw,72px)}
-    .contact-info{border-left:1px solid var(--line);padding-left:35px;display:grid;gap:26px}
-    .contact-info span{display:block;color:var(--gold);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:5px}
-    footer{padding:35px 0;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:#8f8b98}
-    .footer-row{display:flex;justify-content:space-between;gap:20px}
-    @media(max-width:850px){nav{display:none}.nav{height:78px}.brand img{width:150px}.hero{padding-top:78px}.hero-content{padding:100px 0 80px}section{padding:80px 0}.pillars,.projects,.opps,.about-grid,.contact-grid{grid-template-columns:1fr}.pillars{gap:20px}.pillar{border-right:0;border-bottom:1px solid rgba(11,8,32,.15);padding-bottom:22px}.section-head{display:block}.section-head p{margin-top:18px}.photo{height:300px}.contact-info{border-left:0;border-top:1px solid var(--line);padding:30px 0 0}.footer-row{display:block}.footer-row div+div{margin-top:8px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red Island Investments | Madagascar Real Estate & Investment</title>
+<meta name="description" content="Red Island Investments — real estate, investment and development opportunities in Madagascar.">
+<link rel="icon" type="image/jpeg" href="favicon.jpg">
+<link rel="shortcut icon" type="image/jpeg" href="favicon.jpg">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
+
+:root{
+  --bg:#08061d;
+  --panel:#100d2b;
+  --panel2:#14112f;
+  --text:#f7f5f1;
+  --muted:#aaa6b9;
+  --gold:#d9b85b;
+  --line:rgba(255,255,255,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.container{width:min(1180px,calc(100% - 48px));margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(8,6,29,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{height:96px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.logo{width:205px;height:auto}
+nav{display:flex;align-items:center;gap:34px;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+nav a{color:#e9e6ef;transition:.2s}
+nav a:hover{color:var(--gold)}
+.lang{display:flex;border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:4px;gap:2px}
+.lang button{border:0;background:transparent;color:#aaa6b9;padding:9px 12px;border-radius:22px;cursor:pointer;font-weight:600}
+.lang button.active{background:var(--gold);color:#09071d}
+.hero{min-height:78vh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,6,29,.86),rgba(8,6,29,.18) 65%,rgba(8,6,29,.08)),linear-gradient(0deg,rgba(8,6,29,.75),transparent 55%)}
+.hero-content{position:relative;z-index:2;padding:100px 0 90px;max-width:760px}
+.eyebrow{color:var(--gold);letter-spacing:4px;text-transform:uppercase;font-size:12px;font-weight:600;margin-bottom:20px}
+h1,h2,h3{font-family:"Playfair Display",serif;font-weight:500;margin:0}
+h1{font-size:clamp(54px,7vw,92px);line-height:.98}
+.hero p{font-size:19px;line-height:1.7;color:#ddd9e4;max-width:650px;margin:28px 0}
+.btn{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--gold);padding:15px 23px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:600}
+section{padding:105px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:50px}
+.section-head h2{font-size:54px}
+.section-head p{max-width:470px;color:var(--muted);line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);overflow:hidden}
+.card-image{height:330px;overflow:hidden;background:#111}
+.card-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover .card-image img{transform:scale(1.04)}
+.card-body{padding:30px}
+.card h3{font-size:31px;margin-bottom:8px}
+.meta{color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+.card p{color:var(--muted);line-height:1.65;margin:0 0 25px}
+.link{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:2px}
+.feature{display:grid;grid-template-columns:1.15fr .85fr;min-height:570px}
+.feature-img{min-height:570px}
+.feature-img img{width:100%;height:100%;object-fit:cover}
+.feature-copy{background:var(--panel);padding:70px;display:flex;flex-direction:column;justify-content:center}
+.feature-copy h2{font-size:58px;margin-bottom:20px}
+.feature-copy p{color:var(--muted);line-height:1.8}
+.contact{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.contact h2{font-size:60px}
+.contact-info{display:flex;flex-direction:column;gap:20px;justify-content:center}
+.contact-item span{display:block;color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.contact-item a{font-size:20px}
+footer{padding:40px 0;color:var(--muted);font-size:13px}
+.footer-inner{display:flex;justify-content:space-between;gap:30px;align-items:center}
+footer img{width:180px}
+.mobile-menu{display:none}
+
+@media(max-width:850px){
+  .container{width:min(100% - 30px,650px)}
+  .nav{height:82px}
+  .logo{width:160px}
+  nav{display:none}
+  .mobile-menu{display:block;color:var(--gold);font-size:22px}
+  .hero{min-height:75vh}
+  .hero-content{padding:80px 0 55px}
+  h1{font-size:54px}
+  .section-head,.contact-grid{display:block}
+  .section-head h2{font-size:44px;margin-bottom:20px}
+  .grid{grid-template-columns:1fr}
+  .feature{grid-template-columns:1fr}
+  .feature-img{min-height:380px}
+  .feature-copy{padding:45px 30px}
+  .feature-copy h2{font-size:46px}
+  .contact h2{font-size:48px;margin-bottom:35px}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
+
 <body>
+
 <header>
   <div class="container nav">
-    <a class="brand" href="#top"><img src="logo-rdi.png" alt="Red Island Investments"></a>
+    <a href="#top"><img class="logo" src="logo-rdi.png" alt="Red Island Investments"></a>
     <nav>
       <a href="#projects" data-en="Projects" data-fr="Projets">Projects</a>
       <a href="#investment" data-en="Investment" data-fr="Investissement">Investment</a>
-      <a href="#acquisition" data-en="Acquisitions" data-fr="Acquisitions">Acquisitions</a>
+      <a href="#acquisitions" data-en="Acquisitions" data-fr="Acquisitions">Acquisitions</a>
       <a href="#about" data-en="About" data-fr="À propos">About</a>
       <a href="#contact" data-en="Contact" data-fr="Contact">Contact</a>
     </nav>
-    <div class="lang"><button id="enBtn" class="active">EN</button><button id="frBtn">FR</button></div>
+    <div class="lang">
+      <button id="enBtn" class="active" onclick="setLang('en')">EN</button>
+      <button id="frBtn" onclick="setLang('fr')">FR</button>
+    </div>
   </div>
 </header>
 
 <main id="top">
-  <div class="hero">
-    <div class="hero-photo"></div>
+  <section class="hero">
+    <img src="hero.jpg" alt="Luxury property in Madagascar">
     <div class="container hero-content">
-      <div class="eyebrow" data-en="MADAGASCAR · REAL ESTATE · INVESTMENT · DEVELOPMENT" data-fr="MADAGASCAR · IMMOBILIER · INVESTISSEMENT · DÉVELOPPEMENT">MADAGASCAR · REAL ESTATE · INVESTMENT · DEVELOPMENT</div>
-      <h1 data-en="Building value in Madagascar." data-fr="Créer de la valeur à Madagascar.">Building value in Madagascar.</h1>
-      <p data-en="Red Island Investments develops, acquires and structures real estate opportunities across Madagascar, with a focus on quality assets and long-term value creation." data-fr="Red Island Investments développe, acquiert et structure des opportunités immobilières à Madagascar, avec une approche centrée sur des actifs de qualité et la création de valeur à long terme.">Red Island Investments develops, acquires and structures real estate opportunities across Madagascar, with a focus on quality assets and long-term value creation.</p>
-      <div class="buttons"><a class="btn primary" href="#projects" data-en="Explore projects" data-fr="Découvrir nos projets">Explore projects</a><a class="btn" href="#contact" data-en="Contact us" data-fr="Nous contacter">Contact us</a></div>
-    </div>
-  </div>
-
-  <section class="light">
-    <div class="container">
-      <div class="section-head">
-        <div><div class="kicker" data-en="Our approach" data-fr="Notre approche">Our approach</div><h2 data-en="Real estate with a long-term view." data-fr="L'immobilier avec une vision à long terme.">Real estate with a long-term view.</h2></div>
-        <p data-en="We combine local knowledge, disciplined acquisition and development to identify opportunities with strong fundamentals." data-fr="Nous combinons connaissance du marché local, acquisition rigoureuse et développement pour identifier des opportunités aux fondamentaux solides.">We combine local knowledge, disciplined acquisition and development to identify opportunities with strong fundamentals.</p>
-      </div>
-      <div class="pillars">
-        <div class="pillar"><h3>01</h3><h3 data-en="Acquisition" data-fr="Acquisition">Acquisition</h3><p data-en="Identifying strategic land and property opportunities." data-fr="Identification de terrains et d'actifs immobiliers stratégiques.">Identifying strategic land and property opportunities.</p></div>
-        <div class="pillar"><h3>02</h3><h3 data-en="Development" data-fr="Développement">Development</h3><p data-en="Turning carefully selected assets into high-quality projects." data-fr="Transformer des actifs sélectionnés en projets immobiliers de qualité.">Turning carefully selected assets into high-quality projects.</p></div>
-        <div class="pillar"><h3>03</h3><h3 data-en="Investment" data-fr="Investissement">Investment</h3><p data-en="Structuring opportunities for strategic and private investors." data-fr="Structurer des opportunités pour investisseurs privés et stratégiques.">Structuring opportunities for strategic and private investors.</p></div>
-        <div class="pillar"><h3>04</h3><h3 data-en="Value" data-fr="Valeur">Value</h3><p data-en="Building durable value through quality, location and execution." data-fr="Créer une valeur durable grâce à la qualité, l'emplacement et l'exécution.">Building durable value through quality, location and execution.</p></div>
-      </div>
+      <div class="eyebrow">Madagascar · Real Estate · Investment · Development</div>
+      <h1 data-en="Real Estate.<br>Investment.<br>Development." data-fr="Immobilier.<br>Investissement.<br>Développement.">Real Estate.<br>Investment.<br>Development.</h1>
+      <p data-en="Red Island Investments develops and identifies high-value real estate opportunities in Madagascar, with a focus on exceptional locations and long-term value." data-fr="Red Island Investments développe et identifie des opportunités immobilières à forte valeur à Madagascar, avec un focus sur des emplacements exceptionnels et la création de valeur à long terme.">Red Island Investments develops and identifies high-value real estate opportunities in Madagascar, with a focus on exceptional locations and long-term value.</p>
+      <a class="btn" href="#projects" data-en="Explore our projects →" data-fr="Découvrir nos projets →">Explore our projects →</a>
     </div>
   </section>
 
   <section id="projects">
     <div class="container">
       <div class="section-head">
-        <div><div class="kicker" data-en="Selected developments" data-fr="Projets sélectionnés">Selected developments</div><h2 data-en="Projects" data-fr="Projets">Projects</h2></div>
+        <div>
+          <div class="eyebrow">Selected Developments</div>
+          <h2 data-en="Projects" data-fr="Projets">Projects</h2>
+        </div>
         <p data-en="A growing portfolio of real estate developments in Madagascar." data-fr="Un portefeuille en développement de projets immobiliers à Madagascar.">A growing portfolio of real estate developments in Madagascar.</p>
       </div>
-      <div class="projects">
+
+      <div class="grid">
         <article class="card">
-          <a href="infinity-heights.html">
-            <div class="photo infinity"></div>
-            <div class="card-body"><h3>Infinity Heights</h3><div class="meta">Nosy Be · Luxury Development</div><p data-en="A flagship development of 12 private luxury villas in Nosy Be." data-fr="Un projet phare de 12 villas privées de standing à Nosy Be.">A flagship development of 12 private luxury villas in Nosy Be.</p><span class="link" data-en="View project →" data-fr="Voir le projet →">View project →</span></div>
-          </a>
+          <div class="card-image"><img src="infinity-heights-1.png" alt="Infinity Heights Nosy Be"></div>
+          <div class="card-body">
+            <h3>Infinity Heights</h3>
+            <div class="meta">Nosy Be · Luxury Development</div>
+            <p data-en="A flagship development of 12 private luxury villas in Nosy Be." data-fr="Un projet phare de 12 villas privées de luxe à Nosy Be.">A flagship development of 12 private luxury villas in Nosy Be.</p>
+            <a class="link" href="https://infinityheights.uk/" target="_blank" rel="noopener" data-en="View project →" data-fr="Voir le projet →">View project →</a>
+          </div>
         </article>
+
         <article class="card">
-          <div class="photo ivato"></div>
-          <div class="card-body"><h3>Ivato</h3><div class="meta">Antananarivo · Residential</div><p data-en="A residential development project in the Ivato area." data-fr="Un projet résidentiel situé dans le secteur d'Ivato.">A residential development project in the Ivato area.</p></div>
+          <div class="card-image"><img src="ivato-1.jpg" alt="Ivato residential development"></div>
+          <div class="card-body">
+            <h3>Ivato</h3>
+            <div class="meta">Antananarivo · Residential</div>
+            <p data-en="A contemporary residential development project in the Ivato area." data-fr="Un projet résidentiel contemporain dans la zone d'Ivato.">A contemporary residential development project in the Ivato area.</p>
+            <a class="link" href="#contact" data-en="Enquire →" data-fr="Nous contacter →">Enquire →</a>
+          </div>
         </article>
+
         <article class="card">
-          <div class="photo androhibe"></div>
-          <div class="card-body"><h3>Androhibe</h3><div class="meta">Antananarivo · Residential</div><p data-en="A contemporary residential development in Androhibe." data-fr="Un projet résidentiel contemporain à Androhibe.">A contemporary residential development in Androhibe.</p></div>
+          <div class="card-image"><img src="androhibe-1.jpg" alt="Androhibe residential development"></div>
+          <div class="card-body">
+            <h3>Androhibe</h3>
+            <div class="meta">Antananarivo · Residential</div>
+            <p data-en="A contemporary residential development in Androhibe." data-fr="Un projet résidentiel contemporain à Androhibe.">A contemporary residential development in Androhibe.</p>
+            <a class="link" href="#contact" data-en="Enquire →" data-fr="Nous contacter →">Enquire →</a>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
-  <section id="investment" class="light">
+  <section id="investment">
+    <div class="container">
+      <div class="feature">
+        <div class="feature-img"><img src="infinity-heights-2.png" alt="Infinity Heights"></div>
+        <div class="feature-copy">
+          <div class="eyebrow">Investment Opportunities</div>
+          <h2 data-en="Built for long-term value." data-fr="Créer de la valeur sur le long terme.">Built for long-term value.</h2>
+          <p data-en="We focus on carefully selected acquisitions, development partnerships and income-generating real estate opportunities across Madagascar." data-fr="Nous nous concentrons sur des acquisitions sélectionnées avec soin, des partenariats de développement et des opportunités immobilières génératrices de revenus à Madagascar.">We focus on carefully selected acquisitions, development partnerships and income-generating real estate opportunities across Madagascar.</p>
+          <a class="btn" href="#contact" data-en="Discuss an opportunity →" data-fr="Discuter d'une opportunité →">Discuss an opportunity →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="acquisitions">
     <div class="container">
       <div class="section-head">
-        <div><div class="kicker" data-en="For investors" data-fr="Pour les investisseurs">For investors</div><h2 data-en="Investment opportunities." data-fr="Opportunités d'investissement.">Investment opportunities.</h2></div>
-        <p data-en="We work with partners looking for exposure to carefully selected real estate opportunities in Madagascar." data-fr="Nous travaillons avec des partenaires recherchant une exposition à des opportunités immobilières soigneusement sélectionnées à Madagascar.">We work with partners looking for exposure to carefully selected real estate opportunities in Madagascar.</p>
+        <div>
+          <div class="eyebrow">Real Estate</div>
+          <h2 data-en="For Sale" data-fr="À vendre">For Sale</h2>
+        </div>
+        <p data-en="Selected properties and development opportunities available for acquisition." data-fr="Une sélection de biens et d'opportunités de développement disponibles à l'acquisition.">Selected properties and development opportunities available for acquisition.</p>
       </div>
-      <div class="opps">
-        <div class="opp"><h3 data-en="Strategic partnerships" data-fr="Partenariats stratégiques">Strategic partnerships</h3><p data-en="Development partnerships and capital participation for selected projects." data-fr="Partenariats de développement et participation au capital pour certains projets.">Development partnerships and capital participation for selected projects.</p></div>
-        <div class="opp"><h3 data-en="Income-generating assets" data-fr="Actifs générateurs de revenus">Income-generating assets</h3><p data-en="Opportunities focused on quality properties with long-term income potential." data-fr="Opportunités axées sur des biens de qualité avec un potentiel de revenus à long terme.">Opportunities focused on quality properties with long-term income potential.</p></div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-image"><img src="infinity-heights-3.png" alt="Luxury property"></div>
+          <div class="card-body">
+            <h3 data-en="Luxury Properties" data-fr="Propriétés de luxe">Luxury Properties</h3>
+            <div class="meta">Madagascar</div>
+            <p data-en="Premium residential properties in carefully selected locations." data-fr="Des propriétés résidentielles premium dans des emplacements soigneusement sélectionnés.">Premium residential properties in carefully selected locations.</p>
+            <a class="link" href="#contact" data-en="Enquire →" data-fr="Nous contacter →">Enquire →</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image"><img src="ivato-2.jpg" alt="Ivato project"></div>
+          <div class="card-body">
+            <h3 data-en="Development Opportunities" data-fr="Opportunités de développement">Development Opportunities</h3>
+            <div class="meta">Antananarivo</div>
+            <p data-en="Projects and land opportunities suitable for development partnerships." data-fr="Des projets et opportunités foncières adaptés à des partenariats de développement.">Projects and land opportunities suitable for development partnerships.</p>
+            <a class="link" href="#contact" data-en="Enquire →" data-fr="Nous contacter →">Enquire →</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-image"><img src="androhibe-2.png" alt="Androhibe interior"></div>
+          <div class="card-body">
+            <h3 data-en="Income-Generating Real Estate" data-fr="Immobilier locatif">Income-Generating Real Estate</h3>
+            <div class="meta">Investment</div>
+            <p data-en="Opportunities designed around rental income and long-term asset value." data-fr="Des opportunités axées sur les revenus locatifs et la valorisation à long terme des actifs.">Opportunities designed around rental income and long-term asset value.</p>
+            <a class="link" href="#contact" data-en="Enquire →" data-fr="Nous contacter →">Enquire →</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section id="acquisition">
-    <div class="container">
-      <div class="about-grid">
-        <div><div class="kicker" data-en="Acquisition opportunities" data-fr="Opportunités d'acquisition">Acquisition opportunities</div><h2 data-en="We look for the right assets." data-fr="Nous recherchons les bons actifs.">We look for the right assets.</h2></div>
-        <div><p data-en="Red Island Investments considers land, properties and development opportunities that match our investment criteria. If you have an asset or project in Madagascar that may be relevant, we welcome a confidential discussion." data-fr="Red Island Investments étudie les terrains, biens immobiliers et opportunités de développement correspondant à nos critères d'investissement. Si vous disposez d'un actif ou d'un projet à Madagascar susceptible de nous intéresser, nous vous invitons à échanger en toute confidentialité.">Red Island Investments considers land, properties and development opportunities that match our investment criteria. If you have an asset or project in Madagascar that may be relevant, we welcome a confidential discussion.</p><a class="btn" href="#contact" data-en="Submit an opportunity" data-fr="Présenter une opportunité">Submit an opportunity</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="light">
-    <div class="container">
-      <div class="about-grid">
-        <div><div class="kicker">Red Island Investments</div><h2 data-en="A Madagascar-focused real estate company." data-fr="Une société immobilière dédiée à Madagascar.">A Madagascar-focused real estate company.</h2></div>
-        <div><p data-en="Our focus is simple: identify quality opportunities, execute carefully and build assets that create lasting value. From Nosy Be to Antananarivo, we are building a portfolio across development, acquisition and investment." data-fr="Notre approche est simple : identifier des opportunités de qualité, exécuter avec rigueur et créer des actifs à valeur durable. De Nosy Be à Antananarivo, nous développons un portefeuille dans l'acquisition, le développement et l'investissement immobilier.">Our focus is simple: identify quality opportunities, execute carefully and build assets that create lasting value. From Nosy Be to Antananarivo, we are building a portfolio across development, acquisition and investment.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
+  <section id="about" class="contact">
     <div class="container contact-grid">
-      <div><div class="kicker" data-en="Get in touch" data-fr="Contact">Get in touch</div><h2 data-en="Let's discuss an opportunity." data-fr="Parlons de votre opportunité.">Let's discuss an opportunity.</h2><div class="buttons"><a class="btn primary" href="mailto:info@redislandinvestments.com">Email us</a></div></div>
+      <div>
+        <div class="eyebrow">Red Island Investments</div>
+        <h2 data-en="A Madagascar-focused real estate company." data-fr="Une société immobilière spécialisée à Madagascar.">A Madagascar-focused real estate company.</h2>
+      </div>
       <div class="contact-info">
-        <div><span>Phone</span><a href="tel:+261320589184">+261 32 05 891 84</a></div>
-        <div><span>Email</span><a href="mailto:info@redislandinvestments.com">info@redislandinvestments.com</a></div>
-        <div><span>Website</span><a href="https://redislandinvestments.com">redislandinvestments.com</a></div>
-        <div><span>Location</span><div>Madagascar</div></div>
+        <div class="contact-item">
+          <span data-en="Focus" data-fr="Expertise">Focus</span>
+          <div data-en="Real Estate · Investment · Development" data-fr="Immobilier · Investissement · Développement">Real Estate · Investment · Development</div>
+        </div>
+        <div class="contact-item">
+          <span data-en="Location" data-fr="Localisation">Location</span>
+          <div>Madagascar</div>
+        </div>
+        <div class="contact-item">
+          <span data-en="Flagship Development" data-fr="Projet phare">Flagship Development</span>
+          <div>Infinity Heights · Nosy Be</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container contact-grid">
+      <div>
+        <div class="eyebrow">Get in touch</div>
+        <h2 data-en="Let's discuss your next opportunity." data-fr="Parlons de votre prochaine opportunité.">Let's discuss your next opportunity.</h2>
+      </div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span>Phone</span>
+          <a href="tel:+261320589184">+261 32 05 891 84</a>
+        </div>
+        <div class="contact-item">
+          <span>Email</span>
+          <a href="mailto:info@redislandinvestments.com">info@redislandinvestments.com</a>
+        </div>
+        <div class="contact-item">
+          <span>Website</span>
+          <a href="https://redislandinvestments.com" target="_blank" rel="noopener">redislandinvestments.com</a>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="container footer-row"><div>© <span id="year"></span> Red Island Investments</div><div>MADAGASCAR · REAL ESTATE · INVESTMENT · DEVELOPMENT</div></div>
+  <div class="container footer-inner">
+    <img src="logo-rdi.png" alt="Red Island Investments">
+    <div>© 2026 Red Island Investments. All rights reserved.</div>
+  </div>
 </footer>
 
 <script>
-  const buttons={en:document.getElementById("enBtn"),fr:document.getElementById("frBtn")};
-  function setLang(lang){
-    document.documentElement.lang=lang;
-    document.querySelectorAll("[data-en]").forEach(el=>el.textContent=el.dataset[lang]);
-    buttons.en.classList.toggle("active",lang==="en");
-    buttons.fr.classList.toggle("active",lang==="fr");
-    localStorage.setItem("rdi-lang",lang);
-  }
-  buttons.en.onclick=()=>setLang("en"); buttons.fr.onclick=()=>setLang("fr");
-  document.getElementById("year").textContent=new Date().getFullYear();
-  setLang(localStorage.getItem("rdi-lang")||"en");
+function setLang(lang){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    el.innerHTML = el.dataset[lang];
+  });
+  document.getElementById("enBtn").classList.toggle("active",lang==="en");
+  document.getElementById("frBtn").classList.toggle("active",lang==="fr");
+  localStorage.setItem("rdi-lang",lang);
+}
+const saved=localStorage.getItem("rdi-lang");
+if(saved) setLang(saved);
 </script>
+
 </body>
 </html>
