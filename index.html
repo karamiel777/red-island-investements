@@ -113,16 +113,19 @@ footer{padding:40px 0;color:var(--muted);font-size:13px}
 footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
 .mobile-menu{display:none;background:none;border:0;color:var(--gold);cursor:pointer;padding:6px}
 .mobile-nav{display:none}
+.mobile-lang{display:none}
 
 @media(max-width:850px){
   .container{width:min(100% - 30px,650px)}
   .nav{height:82px}
   .logo{max-width:140px;max-height:44px}
   nav{display:none}
+  .desktop-lang{display:none}
   .mobile-menu{display:block;font-size:26px;line-height:1}
   .mobile-nav{position:fixed;top:82px;left:0;right:0;bottom:0;background:rgba(8,6,29,.98);backdrop-filter:blur(14px);flex-direction:column;padding:20px 24px;opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .2s,transform .2s;z-index:19;overflow-y:auto}
   .mobile-nav.open{display:flex;opacity:1;pointer-events:auto;transform:translateY(0)}
   .mobile-nav a{display:block;padding:20px 4px;border-bottom:1px solid var(--line);font-size:16px;letter-spacing:2px;text-transform:uppercase;color:#e9e6ef}
+  .mobile-lang{display:flex;justify-content:center;margin-top:26px}
   .hero{min-height:75vh}
   .hero-content{padding:80px 0 55px}
   h1{font-size:54px}
@@ -153,19 +156,23 @@ footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
       <a href="#about" data-en="About" data-fr="À propos">About</a>
       <a href="#contact" data-en="Contact" data-fr="Contact">Contact</a>
     </nav>
-    <div class="lang">
+    <div class="lang desktop-lang">
       <button id="enBtn" class="active" onclick="setLang('en')">EN</button>
       <button id="frBtn" onclick="setLang('fr')">FR</button>
     </div>
     <button class="mobile-menu" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
-  <nav class="mobile-nav" id="mobileNav">
-    <a href="#projects" data-en="Projects" data-fr="Projets">Projects</a>
-    <a href="#investment" data-en="Investment" data-fr="Investissement">Investment</a>
-    <a href="#about" data-en="About" data-fr="À propos">About</a>
-    <a href="#contact" data-en="Contact" data-fr="Contact">Contact</a>
-  </nav>
 </header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#projects" data-en="Projects" data-fr="Projets">Projects</a>
+  <a href="#investment" data-en="Investment" data-fr="Investissement">Investment</a>
+  <a href="#about" data-en="About" data-fr="À propos">About</a>
+  <a href="#contact" data-en="Contact" data-fr="Contact">Contact</a>
+  <div class="lang mobile-lang">
+    <button id="mEnBtn" class="active" onclick="setLang('en')">EN</button>
+    <button id="mFrBtn" onclick="setLang('fr')">FR</button>
+  </div>
+</nav>
 
 <main id="top">
   <section class="hero">
@@ -353,6 +360,8 @@ function setLang(lang){
   });
   document.getElementById("enBtn").classList.toggle("active",lang==="en");
   document.getElementById("frBtn").classList.toggle("active",lang==="fr");
+  document.getElementById("mEnBtn").classList.toggle("active",lang==="en");
+  document.getElementById("mFrBtn").classList.toggle("active",lang==="fr");
   localStorage.setItem("rdi-lang",lang);
 }
 const saved=localStorage.getItem("rdi-lang");
