@@ -75,6 +75,7 @@ section{padding:105px 0}
 .contact-form .btn{cursor:pointer;background:var(--gold);color:#09071d;border:1px solid var(--gold);width:100%;justify-content:center;padding:16px 23px;font-size:12px;margin-top:6px;border-radius:4px;transition:.2s}
 .contact-form .btn:hover{background:transparent;color:var(--gold)}
 .form-note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px}
+.field-error{color:#e28b8b;font-size:12px;min-height:16px;display:block}
 #form-status{font-size:13px;margin-top:14px;min-height:18px}
 #form-status.ok{color:#8fd19e}
 #form-status.err{color:#e28b8b}
@@ -280,8 +281,9 @@ footer img{width:auto;max-width:180px;max-height:50px;object-fit:contain}
           </div>
           <div class="form-row">
             <div class="form-field">
-              <label data-en="Phone (optional)" data-fr="Téléphone (facultatif)">Phone (optional)</label>
-              <input type="tel" id="cf-phone" placeholder="7 12 345 678">
+              <label data-en="Phone" data-fr="Téléphone">Phone<sup>*</sup></label>
+              <input type="tel" id="cf-phone" placeholder="032 12 345 67" required>
+              <span class="field-error" id="cf-phone-error"></span>
             </div>
             <div class="form-field">
               <label data-en="Project of interest" data-fr="Projet concerné">Project of interest</label>
@@ -378,8 +380,23 @@ document.querySelectorAll(".card-image[data-images]").forEach(box=>{
 });
 
 // Contact form -> sends the message directly via Formspree, no email app needed
+function validatePhone(){
+  const errorEl = document.getElementById("cf-phone-error");
+  const lang = document.documentElement.lang || "en";
+  if(phoneInput.value.trim() === "" || !iti.isValidNumber()){
+    errorEl.textContent = lang === "fr"
+      ? "Merci de saisir un numéro de téléphone valide."
+      : "Please enter a valid phone number.";
+    return false;
+  }
+  errorEl.textContent = "";
+  return true;
+}
+phoneInput.addEventListener("input", ()=>{ if(document.getElementById("cf-phone-error").textContent) validatePhone(); });
+
 async function sendMail(e){
   e.preventDefault();
+  if(!validatePhone()){ phoneInput.focus(); return; }
   const btn = document.getElementById("cf-submit");
   const status = document.getElementById("form-status");
   const lang = document.documentElement.lang || "en";
@@ -412,6 +429,7 @@ async function sendMail(e){
     status.className = "ok";
     e.target.reset();
     iti.setNumber("");
+    document.getElementById("cf-phone-error").textContent = "";
   } catch(err){
     status.textContent = lang === "fr"
       ? "Erreur d'envoi — réessayez ou écrivez directement à info@redislandinvestments.com."
